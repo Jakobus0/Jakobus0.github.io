@@ -61,7 +61,13 @@ class Enemy {
             this.speedVec.add(p5.Vector.mult(a, -1));
             other.speedVec.add(a);
         } else {
-            this.speedVec.add(p5.Vector.sub(snake.pos[0], this.pos));
+            let nearest = snake.pos[0];
+            snake.pos.forEach((e, i) => {
+                if (this.pos.dist(e) < this.pos.dist(nearest)) {
+                    nearest = e;
+                }
+            });
+            this.speedVec.add(p5.Vector.sub(nearest, this.pos));
             this.speedVec.limit(this.speed);
         }
     }
