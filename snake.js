@@ -57,8 +57,10 @@ class Snake {
 
   canEat(cookie) {
     if (this.pos[0].dist(cookie.pos) < cookie.size / 2 + this.rad) {
-      this.grow();
-      this.hp += parseInt(cookie.size / 20);
+      
+      for (let i = 0; i < parseInt(cookie.size / 20); i++)
+        this.grow();
+      this.hp++;
       cookie.eated();
       this.cookieEated++;
     }

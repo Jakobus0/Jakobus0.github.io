@@ -64,6 +64,14 @@ function draw() {
         e.collideOther(o, s);
     });
     e.display();
+    for (let j = 1; j < s.pos.length; j++){
+      if (e.pos.dist(s.pos[j]) < e.size * Math.sqrt(2)) {
+        animations.push(new _Animation(explosionEffect, e.pos.x, e.pos.y));
+        enemies.splice(i, 1);
+        if (s.hp > 0) s.hp--;
+        explosionSound.play();
+      }
+    }
     if (e.pos.dist(s.pos[0]) < e.size + s.rad) {
       animations.push(new _Animation(explosionEffect, e.pos.x, e.pos.y));
       enemies.splice(i, 1);
@@ -77,7 +85,7 @@ function draw() {
       bullets.splice(i, 1);
     }
     enemies.forEach((e, j) => {
-      if (e.pos.dist(b.pos) < e.size * Math.sqrt(5)) {
+      if (e.pos.dist(b.pos) < e.size * 2 * Math.sqrt(2)) {
         animations.push(new _Animation(explosionEffect, e.pos.x, e.pos.y));
         enemies.splice(j, 1);
         bullets.splice(i, 1);
